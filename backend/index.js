@@ -30,3 +30,20 @@ connectDB().then(()=>{
         console.log("Server running at port ", PORT )
     })
 })
+
+// Example of exporting a handler function
+module.exports.handler = async (event, context) => {
+    try {
+      // Your serverless function logic here
+    return {
+        statusCode: 200,
+        body: JSON.stringify({ message: "Hello from serverless function!" })
+    };
+    } catch (error) {
+    console.error("Error:", error);
+    return {
+        statusCode: 500,
+        body: JSON.stringify({ error: "Internal Server Error" })
+    };
+    }
+};
