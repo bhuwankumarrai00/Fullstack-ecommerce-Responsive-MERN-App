@@ -6,7 +6,7 @@ const cookiesParser = require('cookie-parser')
 
 const app = express()
 app.use(cors({
-    origin : process.env.FRONTEND_URL,
+    origin : ["https://fullstack-ecommerce-responsive-mern-app-7dmc.vercel.app/"],
     credentials : true
 }))
 app.use(express.json())
