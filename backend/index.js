@@ -7,45 +7,31 @@ const cookieParser = require('cookie-parser');
 const app = express();
 
 app.use(cors({
-    origin: process.env.FRONTEND_URL,
+    origin: process.env.FRONTEND_URL || "http://localhost:3000", // Adjust as per your frontend URL
     credentials: true
 }));
 
 app.use(express.json());
 app.use(cookieParser());
 
-// Use process.env.PORT for dynamic port assignment on platforms like Vercel
-const PORT = process.env.PORT || 8080;
-
-app.get("/", (request, response) => {
-    response.json({
-        message: "Server running at port " + PORT,
-        success: true
-    });
-});
-
 // API endpoint
 app.use('/api', Router);
 
-connectDB().then(() => {
+// Connect to MongoDB
+connectDB()
+  .then(() => {
+    console.log("MongoDB connected");
+
+    // Set up server to listen
+    const PORT = process.env.PORT || 8080;
     app.listen(PORT, () => {
         console.log("Server running at port ", PORT);
     });
-});
+  })
+  .catch(err => {
+    console.error("MongoDB connection error:", err);
+    process.exit(1); // Exit process with failure
+  });
 
-// Example of exporting a handler function for serverless deployment (like Vercel)
-module.exports.handler = async (event, context) => {
-    try {
-        // Your serverless function logic here
-        return {
-            statusCode: 200,
-            body: JSON.stringify({ message: "Hello from serverless function!" })
-        };
-    } catch (error) {
-        console.error("Error:", error);
-        return {
-            statusCode: 500,
-            body: JSON.stringify({ error: "Internal Server Error" })
-        };
-    }
-};
+// Export app for serverless deployment (if needed)
+module.exports = app;
