@@ -7,7 +7,7 @@ const cookieParser = require('cookie-parser');
 const app = express();
 
 app.use(cors({
-    origin: process.env.FRONTEND_URL || "http://localhost:3000", // Adjust as per your frontend URL
+    origin: process.env.FRONTEND_URL, // Adjust as per your frontend URL
     credentials: true
 }));
 
@@ -23,7 +23,7 @@ connectDB()
     console.log("MongoDB connected");
 
     // Set up server to listen
-    const PORT = process.env.PORT || 8080;
+    const PORT = process.env.PORT;
     app.listen(PORT, () => {
         console.log("Server running at port ", PORT);
     });
