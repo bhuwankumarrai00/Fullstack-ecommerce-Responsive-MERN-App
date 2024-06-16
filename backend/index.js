@@ -7,7 +7,7 @@ const cookieParser = require('cookie-parser');
 const app = express();
 
 app.use(cors({
-    origin: ["https://fullstack-ecommerce-responsive-mern-app-7dmc.vercel.app"],
+    origin: process.env.FRONTEND_URL,
     credentials: true
 }));
 
