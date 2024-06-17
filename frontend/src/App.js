@@ -13,7 +13,7 @@ function App() {
 
   const fetchUserDetails = async()=>{
    try {
-      const response = await axios.get("https://fullstack-ecommerce-responsive-mern-app.vercel.app/api/user-details")
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/user-details`)
 
       if(response.data.success){
         dispatch(setuser(response.data.data))
@@ -25,7 +25,7 @@ function App() {
 
   const fetchProduct  = async()=>{
       try {
-        const response = await axios.get("https://fullstack-ecommerce-responsive-mern-app.vercel.app/api/product")
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/product`)
 
         if(response.data.success){
           dispatch(setProduct(response.data.data))
