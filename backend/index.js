@@ -23,7 +23,7 @@ connectDB()
     console.log("MongoDB connected");
 
     // Set up server to listen
-    const PORT = process.env.PORT;
+    const PORT = 5000;
     app.listen(PORT, () => {
         console.log("Server running at port ", PORT);
     });
